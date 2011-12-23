@@ -1,0 +1,150 @@
+<!DOCTYPE HTML>
+<html manifest="timer.manifest">
+<head>
+	<title>Race Timer</title>
+	<meta name = "viewport" content = "user-scalable=no, width=device-width"/>
+	<link rel="stylesheet" type="text/css" media="screen" href="css/reset.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="css/screen.css" />
+	<script src="js/mootools-1.2.4-core-yc.js" language="javascript" type="text/javascript"></script>
+	<script src="js/race-timer.js" language="javascript" type="text/javascript"></script>
+</head>
+
+<body>
+	<div id="timing_screen">
+		<table>
+			<thead>
+				<tr>
+					<th>#</th>
+					<th>status</th>
+					<th>time</th>
+					<th>pl</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr id="racerX">
+					<td id="racerbibX" class="racerbib">&nbsp;&nbsp;&nbsp;</td>
+					<td><input type="button" value="Add" onclick="add_racer()"/></td>
+					<td class="race_time"></td>
+					<td class="race_rank"></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div id="time_screen">
+		<div id="start_time">XX:XX:XX</div>
+		<input type="button" value="Start" onclick="start_time()" />
+		<input type="button" value="Clear" onclick="clear_time()" /><br/>
+		<input type="button" value="Done" onclick="done_time()" />
+	</div>
+	<div id="race_screen">
+		<label for="racers_start">Racers per start</label>
+		<select id="racers_start" name="racers_start" onchange="set_racers_start()">
+			<option value="0">All</option>
+			<option value="1" selected="selected">1</option>
+			<option value="2">2</option>
+			<option value="3">3</option>
+			<option value="4">4</option>
+			<option value="5">5</option>
+			<option value="6">6</option>
+			<option value="7">7</option>
+			<option value="8">8</option>
+			<option value="9">9</option>
+			<option value="10">10</option>
+		</select><br/>
+		<label for="start_int">Start Interval</label>
+		<select id="start_int" name="start_int" onchange="set_racers_int()">
+			<option value="0">Mass Start</option>
+			<option value="5">5 sec</option>
+			<option value="10">10 sec</option>
+			<option value="15">15 sec</option>
+			<option value="20">20 sec</option>
+			<option value="30" selected="selected">30 sec</option>
+			<option value="60">1 min</option>
+			<option value="120">2 min</option>
+		</select><br/>
+		<label for="start_bib">Starting Bib</label>
+		<select id="start_bib" name="start_bib" onchange="set_start_bib()">
+			<option value="0">0</option>
+			<option value="1">1</option>
+			<option value="2">2</option>
+			<option value="3">3</option>
+			<option value="4">4</option>
+			<option value="5">5</option>
+			<option value="6">6</option>
+			<option value="7">7</option>
+			<option value="8">8</option>
+			<option value="9">9</option>
+			<option value="10">10</option>
+		</select>
+		<br/>
+		<input type="button" value="Done" onclick="done_race()" />
+	</div>
+	<div id="setup_screen">
+		<label for="race_name">Race Name</label><input id="race_name" type="text" value="" onblur="set_race_name()" />
+		<label for="race_event">Race Event</label><input id="race_event" type="text" value="" onblur="set_race_event()" />
+		<label for="race_date">Race Date</label><input id="race_date" type="text" value="" onblur="set_race_date()" />
+		<input type="button" value="Done" onclick="done_setup()" />
+	</div>
+<!--	<div id="results_screen">
+		<table>
+			<thead>
+				<tr>
+					<th>#</th>
+					<th>status</th>
+					<th>time</th>
+					<th>pl</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr id="racerX" style="display: none">
+					<th>#</th>
+					<th>status</th>
+					<th>time</th>
+					<th>pl</th>
+				</tr>
+			</tbody>
+		</table>
+		<input type="button" value="Done" onclick="done_results()" />
+	</div> -->
+	<div id="keypad">
+		<table>
+			<tr class="push_button_row">
+				<td><input class="no_click" id="button_7" type="button" onclick="push_button(7)" value="7"/></td>
+				<td><input class="no_click" id="button_8" type="button" onclick="push_button(8)" value="8"/></td>
+				<td><input class="no_click" id="button_9" type="button" onclick="push_button(9)" value="9"/></td>
+			</tr>
+			<tr class="push_button_row">
+				<td><input class="no_click" id="button_4" type="button" onclick="push_button(4)" value="4"/></td>
+				<td><input class="no_click" id="button_5" type="button" onclick="push_button(5)" value="5"/></td>
+				<td><input class="no_click" id="button_6" type="button" onclick="push_button(6)" value="6"/></td>
+			</tr>
+			<tr class="push_button_row">
+				<td><input class="no_click" id="button_1" type="button" onclick="push_button(1)" value="1"/></td>
+				<td><input class="no_click" id="button_2" type="button" onclick="push_button(2)" value="2"/></td>
+				<td><input class="no_click" id="button_3" type="button" onclick="push_button(3)" value="3"/></td>
+			</tr>
+			<tr class="push_button_row">
+				<td><input class="no_click" id="button_X" type="button" onclick="push_button('X')" value="X"/></td>
+				<td><input class="no_click" id="button_0" type="button" onclick="push_button(0)" value="0"/></td>
+				<td><input class="no_click" id="button_lt" type="button" onclick="push_button('<')" value="<"/></td>
+			</tr>
+		</table>
+		<div>
+			<input type="button" onclick="push_time()" value="Time"/>
+			<input type="button" onclick="push_race()" value="Race"/>
+			<br/>
+			<input type="button" onclick="push_results()" value="Results"/>
+			<input type="button" onclick="push_clear()" value="Clear"/>
+			<br/>
+			<input type="button" onclick="push_setup()" value="Setup"/>
+			<input type="button" onclick="push_upload()" value="Upload"/>
+		</div>
+	</div>
+	<div id="data_screen">
+	</div>
+	<div>
+		<p id="debug"></p>
+	</div>
+</body>
+
+</html>

@@ -1,0 +1,66 @@
+/* 
+    Document   : screen
+    Created on : Dec 11, 2010, 8:40:24 PM
+    Author     : Matthew
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/* 
+   TODO customize this sample style
+   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+*/
+
+root { 
+    display: block;
+}
+
+body {
+	width: 318px;
+	height: 352px;
+	border: 2px solid green;
+	font: 24px arial;
+}
+
+input {
+	font-family: arial;
+	font-size: 32px;
+}
+#keypad table input {
+	font-size: 36px;
+}
+input.racing { background-color: red; }
+input.done { background-color: #88f; }
+input.no_click { background-color: white; }
+input.single_click { background-color: #88f; }
+input.double_click { background-color: #8ff; }
+td.race_rank { text-align: center; }
+
+#time_screen, #race_screen, #results_screen, #setup_screen
+{
+	display: none;
+}
+
+.box_enter
+{
+	margin-left: 10px;
+	margin-right: 10px;
+	padding-left: 5px;
+	padding-right: 5px;
+	border: 1px solid black;
+}
+
+#results .racerbib
+{
+	width: 20px;
+}
+
+#keypad .push_button_row
+{
+	height: 30px;
+}
+
+#keypad .push_button_row td
+{
+	width: 40px;
+}
